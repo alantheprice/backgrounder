@@ -19,3 +19,4 @@ module Bkgdr {
     }
     
 }
+export var Backgrounder = Bkgdr;

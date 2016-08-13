@@ -1,0 +1,19 @@
+{
+  "name": "bkgdr",
+  "version": "0.1.6",
+  "description": "Bkgdr (backgrounder) -- promise wapper around webworkers.",
+  "main": "bkgdr.js",
+  "keywords": [
+    "background",
+    "webworker",
+    "promise"
+  ],
+  "author": "alan@theprices.us",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-ts": "5.4.0"
+  },
+  "files": [
+      "dist"
+  ]
+}

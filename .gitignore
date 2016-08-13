@@ -1,0 +1,6 @@
+.tscache
+*.tmp.txt
+dist
+node_modules
+.zedstate
+typings

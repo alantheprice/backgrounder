@@ -20,7 +20,7 @@ module Bkgdr {
             this.useWorker = useWorker;
             WorkerInterface.instance = this;
             if (useWorker) {
-                this.context = this.setupWorker(workerPath);
+                this.context = this.setupWorker(workerPath); 
                 this.registerMessageHandleForContext(this.context);
             }
         }
@@ -29,13 +29,13 @@ module Bkgdr {
             if (context) {
                 context.onmessage = (msg) =>  this.handleRequests(msg);
                 if (context.onerror === null) {
-                    context.onerror = (msg) => Statics.log(msg);
+                    context.onerror = (msg) => Utils.log(msg);
                 }
             }
         }  
         
         private setupWorker(workerPath?: string): any {
-            if (!Statics.inWorker) {
+            if (!Utils.inWorker) {
                 var loadPath = workerPath || this.getScriptSrcPath();
                 if (loadPath) {
                     return new Worker(loadPath);
@@ -101,7 +101,7 @@ module Bkgdr {
             var func: FunctionDefinition = new FunctionDefinition(functionName, params);
             var data: any = {func: func};
             this.sendMessage(data);
-            data.deferred = this.getDeferred();
+            data.deferred = Utils.getDeferred();
             this.callbacks.push(data);
             return data.deferred.promise;
         }
@@ -131,38 +131,36 @@ module Bkgdr {
             }
         }
 
-        private getDeferred(): any {
-            var deferred: Deferred = <Deferred> {};
-            deferred.promise = new Promise(function(resolve, reject) {
-                deferred.resolve = resolve;
-                deferred.reject = reject;
-            });
-            return deferred;
-        }
-
         /**
          * Calls the native importScripts function on the worker context.
          * @param {string} scriptLocation
          */
         public addScript(scriptLocation): Promise<boolean> {
-            if (this.useWorker && !Statics.inWorker) {
+            if (this.useWorker && !Utils.inWorker) {
                 return this.executeWithPromise("Bkgdr.wi.addScript", [scriptLocation]);
-            } else if (Statics.inWorker) {
+            } else if (Utils.inWorker) {
                 importScripts(scriptLocation);
                 return Promise.resolve(true);
+            } else {
+                return this.addScriptToMainThread(scriptLocation);
             }
+        }
+
+        private addScriptToMainThread(scriptLocation: string): Promise<boolean> {
+            var script = document.createElement("script");
+            script.setAttribute("src", scriptLocation);
+            document.head.appendChild(script);
+            var deferred = Utils.getDeferred();
+            setTimeout(() => {
+                deferred.resolve(true);
+            }, 200);
+            return deferred.promise;
         }
     }
     
     interface WorkerCallback {
         deferred: Deferred;
         func: FunctionDefinition;
-    }
-    
-    interface Deferred {
-        promise: Promise<{}>;
-        resolve: (value: any) => void;
-        reject: (value: any) => void;
     }
     
     interface ReturnData {

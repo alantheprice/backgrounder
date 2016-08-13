@@ -9,7 +9,7 @@ module Bkgdr {
         constructor(functionName: string, params: any[], id?: string) {
             this.functionName = functionName;
             this.params = params;
-            this.id = id || Bkgdr.Statics.getUniqueId();
+            this.id = id || Bkgdr.Utils.getUniqueId();
         }
         
         public buildFunction(baseObject?: any) {

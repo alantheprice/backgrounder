@@ -1,6 +1,6 @@
 {
   "name": "bkgdr",
-  "version": "0.1.6",
+  "version": "1.0.0",
   "description": "Bkgdr (backgrounder) -- promise wapper around webworkers.",
   "main": "bkgdr.js",
   "keywords": [

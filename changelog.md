@@ -1,3 +1,7 @@
+**1.0.0**
+  * Cleaned up the api to make it more simple and consistent.
+  * Added fallback to load scripts in the DOM if not in a webworker context.
+  * Added promise callback to load scripts synchronously.
 **0.1.6**
   * Fixed broken callback chain when not using a worker.
 **0.1.5**

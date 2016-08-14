@@ -1,3 +1,6 @@
+**1.1.0**
+  * Added document, window and console functions as callable functions within a worker.
+  * Updated the way the function Definition object to allow calling restricted objects (window, document, console);
 **1.0.0**
   * Cleaned up the api to make it more simple and consistent.
   * Added fallback to load scripts in the DOM if not in a webworker context.

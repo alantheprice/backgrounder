@@ -1,24 +1,24 @@
 (function iife() {
-    Bkgdr.Setup.init(true, "dist/bkgdr.js");
-    if (!Bkgdr.Statics.inWorker) {
-        Bkgdr.wi.addScript("../test.js");
+    if (!Bkgdr.inWorker) {
+        Bkgdr.init(true, {workerPath: "dist/bkgdr.js"});
+        Bkgdr.wi.addScript("../test.js")
+        .then(() => {
+             return Bkgdr.wi.executeWithPromise("Math.random")
+        }).then(function(returnVal) {
+               console.log(returnVal);
+        });
+        return;
+    } else {
+        setTimeout(() => {doStuff();}, 2000);
     }
-    setTimeout(doStuff, 400);
-    
+
     function doStuff() {
-        if (Bkgdr.Statics.inWorker) {
-           Bkgdr.wi.executeWithPromise("Date.now")
-                .then(function(val) {
-                var returnVal = "Date.now from worker: " + val;
-                Bkgdr.Statics.log(returnVal);
+        Bkgdr.wi.executeWithPromise("Date.now")
+            .then(function(val) {
+            var returnVal = "Date.now from worker: " + val;
+            console.log(returnVal);
             });
-        } else {
-            Bkgdr.wi.executeWithPromise("Math.random")
-             .then(function(returnVal) {
-               Bkgdr.Statics.log(returnVal);
-            });
-        }
-      
+        document.createElement("div");
     }
 
 })();

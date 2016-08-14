@@ -29,7 +29,7 @@ module Bkgdr {
             if (context) {
                 context.onmessage = (msg) =>  this.handleRequests(msg);
                 if (context.onerror === null) {
-                    context.onerror = (msg) => Utils.log(msg);
+                    context.onerror = (msg) => console.log(msg);
                 }
             }
         }  

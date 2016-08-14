@@ -1,7 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="statics.ts" />
-/// <reference path="workerInterface.ts" />
 
+/// <reference path="utils.ts" />
+/// <reference path="workerInterface.ts" />
 
 //grunt-start
 /// <reference path="functionDefinition.ts" />

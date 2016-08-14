@@ -1,6 +1,6 @@
 (function iife() {
     if (!Bkgdr.inWorker) {
-        Bkgdr.init(true, {workerPath: "dist/bkgdr.js"});
+        Bkgdr.init(true, {workerPath: "dist/bkgdr.js"});//, bootstrapWindowContext: false});
         Bkgdr.wi.addScript("../test.js")
         .then(() => {
              return Bkgdr.wi.executeWithPromise("Math.random")

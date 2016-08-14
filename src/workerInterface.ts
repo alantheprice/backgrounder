@@ -16,12 +16,13 @@ module Bkgdr {
             return WorkerInterface.instance;
         }
         
-        private init(useWorker: boolean, workerPath?: string) {
+        private init(useWorker: boolean) {
             this.useWorker = useWorker;
             WorkerInterface.instance = this;
             if (useWorker) {
-                this.context = this.setupWorker(workerPath); 
+                this.context = this.setupWorker(config.workerPath); 
                 this.registerMessageHandleForContext(this.context);
+                this.execute("Bkgdr.setupConfig", [config]);
             }
         }
         

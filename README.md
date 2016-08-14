@@ -13,15 +13,18 @@ Bkgdr is really designed for a plugin type of usage.  Maybe you have an existing
 ### Setup
   * With a script tag, add bkgdr.js to your startup page. 
   * Bkgdr is a single js file that will load itself when workers are enabled.  This allows a simple and unified api whether you are calling a function from the worker, or calling into the worker. 
-  * To use Bkgdr, you must initialize it by calling `Bkgdr.Setup.init(useWorker: boolean, bkgdrScriptPath: string<optional>);`
-    * The second parameter of initialization is optional, but must be specified if you are are embedding Bkgdr within another script file, or if you renamed the Bkgdr.js or Bkgdr.min.js file.
-  * In the very likely case of needing to use extra libraries, or plugins that you have created, all you need to do is to call `Bkgdr.wi().addScript(scriptLocation)`.  NOTE: the scriptLocation will be relative to the main worker script (usually the location of your bkgdr.js file).  
+  * To use Bkgdr, you must initialize it by calling `Bkgdr.init(useWorker: boolean, config?: Bkgdr.Config);`
+    * The second parameter of initialization is optional, but a must be specified if you are are embedding Bkgdr within another script file, or if you renamed the Bkgdr.js or Bkgdr.min.js file.
+  * In the very likely case of needing to use extra libraries, or plugins that you have created:
+    * Call `Bkgdr.wi().addScript(scriptLocation).then(.../**promise returns after load*/...);`
+    * NOTE: the scriptLocation will be relative to the main worker script (usually the location of your bkgdr.js file).  
 
 ### Usage
   * Bkgdr is designed to create a simple, clean and understandable api for dealing with workers.  Once all the setup has been done, whether you are calling from the worker into the main thread or from the main thread to the worker, you would use the same two functions: 
     * `Bkgdr.wi().execute(functionName: string, [params]: any[]);`
     * `Bkgdr.wi().executeWithPromise(functionName: strings, [params]: any[]);`
   * The execute function just calls the namedFunction in the other context with the input parameters.
-  * The executeWithPromise function also calls the named function, but returns a promise that will resolve with any returned data from the other context. 
+  * The executeWithPromise function also calls the named function, but returns a promise that will resolve with any returned data from the other context(forwards promises automatically). 
   * NOTE: both input params and returned data from a promise must be Serializable.  This means no cirular references, etc.
+  
   

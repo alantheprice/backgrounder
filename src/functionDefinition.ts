@@ -1,4 +1,6 @@
 module Bkgdr {
+    "use strict";
+    
     export class FunctionDefinition {
         
         public functionName: string;
@@ -16,8 +18,9 @@ module Bkgdr {
         public buildFunction(baseObject?: any) {
             var functionParts: string[] = this.getDefinitionAsArray();
             var builtFunc: any = baseObject || self;
-            if (functionParts[0] === "document" || functionParts[0] === "console") {
+            if (restrictedProperties.indexOf(functionParts[0]) > -1) {
                 this.handleRestricted = true;
+                return;
             } 
             functionParts.forEach((funcName) => {
                 if (builtFunc && builtFunc[funcName]) {

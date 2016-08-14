@@ -17,13 +17,6 @@ module Bkgdr {
             }
         }
         
-        /**
-         * DEPRECATED: use getUniqueId.
-         */
-        public static getRandomId(): string {
-            return Utils.getUniqueId();
-        }
-        
         public static getUniqueId(): string {
             if (!Utils.lastNum) {
                 Utils.lastNum = parseInt(Math.random().toFixed(4).slice(2, 6));
@@ -49,15 +42,21 @@ module Bkgdr {
             return deferred;
         }
 
-        public static getFunctionNamesFromObj(objName): string[] {
-            var funcNames = [];
+        public static getPropertyNamesFromObj(objName): IProperties {
+            var props = {funcNames: [], propNames: []};
             var obj = self[objName];
+            if (objName.indexOf("Storage") > -1) {
+                props.funcNames.push("getItem");
+                props.funcNames.push("setItem");
+            }
             for(var i in obj) { 
-                if ( typeof obj[i] === "function") {
-                    funcNames.push({name: i, argLength: obj[i].length});
+                if (typeof obj[i] === "function") {
+                    props.funcNames.push(i);
+                } else if (obj.hasOwnProperty(i)) {
+                    props.propNames.push(i)
                 }
             }
-            return funcNames;
+            return props;
         }
         
     }
@@ -71,6 +70,11 @@ module Bkgdr {
         promise: Promise<{}>;
         resolve: (value: any) => void;
         reject: (value: any) => void;
+    }
+
+    export interface IProperties {
+        funcNames: string[];
+        propNames: string[];
     }
 
 }

@@ -1,3 +1,7 @@
+**1.1.2**
+  * Default to current functional scope when invoking functions.
+**1.1.1**
+  * Removed Reference from top of d.ts file.
 **1.1.0**
   * Added document, window and console functions as callable functions within a worker.
   * Updated the way the function Definition object to allow calling restricted objects (window, document, console);

@@ -18,7 +18,8 @@
             var returnVal = "Date.now from worker: " + val;
             console.log(returnVal);
             });
-        document.createElement("div");
+         document.createAttribute('atrsond');
+         Bkgdr.wi.execute("document.body.setAttribute", ["value", "somethinglame"]);
     }
 
 })();

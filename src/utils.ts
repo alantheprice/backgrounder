@@ -5,9 +5,7 @@ module Bkgdr {
         
         private static lastNum: number;
         private static char: string;
-        
-        public static inWorker: boolean = Utils.isWorkerContext();
-        
+
         private static isWorkerContext (): boolean {
             try {
                 return !((<any>self) instanceof Window);
@@ -16,6 +14,8 @@ module Bkgdr {
                return true;
             }
         }
+        
+        public static inWorker: boolean = Utils.isWorkerContext();
         
         public static getUniqueId(): string {
             if (!Utils.lastNum) {

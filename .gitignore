@@ -5,3 +5,5 @@ node_modules
 .zedstate
 typings
 .vscode
+*.log
+yarn.lock

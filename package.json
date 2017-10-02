@@ -1,6 +1,6 @@
 {
   "name": "bkgdr",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Bkgdr (backgrounder) -- promise wapper around webworkers.",
   "main": "bkgdr.js",
   "keywords": [
@@ -9,12 +9,26 @@
     "promise"
   ],
   "author": "alan@theprices.us",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "devDependencies": {
-    "grunt-ts": "5.4.0"
+    "grunt": "^1.0.1",
+    "grunt-ts": "5.4.0",
+    "typescript": "1.7.5"
   },
   "files": [
-      "dist"
-  ]
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alantheprice/backgrounder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alantheprice/backgrounder/issues"
+  },
+  "homepage": "https://github.com/alantheprice/backgrounder/"
 }
- 
